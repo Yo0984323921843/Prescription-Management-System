@@ -1,5 +1,11 @@
-.bg-85486C{
-    background-color: #85486C;
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+ }
+.bg-B693A8{
+    background-color: #B693A8;
 }
 .bg-white{
     background-color: white;
@@ -13,6 +19,7 @@
 .bg-D9D9D9{
     background-color: #D9D9D9;
 }
+
 .clr-D9D9D9{
     color: #D9D9D9;
 }
@@ -20,22 +27,48 @@
     color: #122746;
 }
 /* width */
+.width100vw{
+    width: 99.5vw;
+}
 .width100{
     width: 100%;
 }
 .width60{
     width: 60%;
 }
+
+
+.width40{
+    width: 40%;
+}
+.width30{
+    width: 30%;
+}
+.width20{
+ width: 20%;
+}
+.width80{
+    width: 80%;
+   }
 /* height */
+.height96vh{
+    height: 96vh;
+}
 .height100{
     height: 100%;
 }
 .height60{
     height: 60%;
 }
+.height40{
+    height: 40%;
+}
+.height20{
+    height: 20%;
+}
 /* border radius */
-.bdr-rad-15{
-    border-radius: 15px;
+.bdr-rad-20{
+    border-radius: 20px;
 }
 /* display */
 .flex{
@@ -44,6 +77,101 @@
 .center{
     justify-content: center;
 }
+.space-between{
+    justify-content: space-between;
+}
 .item-center{
     align-items: center;
+}
+.column{
+    flex-direction: column;
+}
+.bdr{
+    border: 2px solid red;
+}
+.bx-shdw-939393{
+    box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.4);
+}
+.pad5{
+    padding: 5%;
+}
+/* Margin */
+.mrgn3{
+    margin: 3%;
+}
+.mrgn-lft-15{
+    margin-left: 15%;
+}
+.mrgn-lft-1p5{
+    margin-left: 1.5%;
+}
+.mrgn-top-8{
+    margin-top: 8%;
+}
+.mrgn-top-1p5{
+    margin-top: 1.5%;
+}
+/* Custom classes */
+.emailtxt{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 2.5vmin;
+line-height: 2.5vmin;
+}
+.frgt-txt{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 1.8vmin;
+line-height: 2vmin;
+}
+.imglogo{
+    width: 35%;
+    height: 50%;
+}
+.contain{
+    background-size: contain;
+
+}
+.cover{
+    background-size: cover;
+
+}
+.div-logo {
+position: absolute;
+width: 20%;
+height: 30%;
+/* background-size: cover; */
+/* background: url('../images/profile.png'); */
+background: #ffffff url("../images/profile.png") no-repeat center center;
+background-size: 100% 100%;
+border-radius: 50%;
+top: -15%;
+left: 38%;
+}
+/* position */
+.absolute{
+    position: absolute;
+}
+
+.login-btn{
+position: fixed;
+top: 70%;
+left: 46%;
+/* width: 100%;
+height: 100%; */
+background: #2C3E59;
+box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 5px;
+border: none;
+padding: 0.5% 2.5%;
+}
+
+.checkbox{
+    width: 10%;
+    /* height: 50%; */
 }
