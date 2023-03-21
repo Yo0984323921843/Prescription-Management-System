@@ -1,0 +1,49 @@
+.bg-85486C{
+    background-color: #85486C;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-122746{
+    background-color: #122746;;
+}
+.bg-2C3E59{
+    background-color: #2C3E59;
+}
+.bg-D9D9D9{
+    background-color: #D9D9D9;
+}
+.clr-D9D9D9{
+    color: #D9D9D9;
+}
+.clr-122746{
+    color: #122746;
+}
+/* width */
+.width100{
+    width: 100%;
+}
+.width60{
+    width: 60%;
+}
+/* height */
+.height100{
+    height: 100%;
+}
+.height60{
+    height: 60%;
+}
+/* border radius */
+.bdr-rad-15{
+    border-radius: 15px;
+}
+/* display */
+.flex{
+    display: flex;
+}
+.center{
+    justify-content: center;
+}
+.item-center{
+    align-items: center;
+}
