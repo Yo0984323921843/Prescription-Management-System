@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" content="" />
+    <meta http-equiv="X-Content-Security-Policy" content="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Add Customer</title>
+  </head>
+  <body>
+    <div class="flex column item-center center bg-5E9BB0 width100 height100">
+      <div class="mrgn0n1 height10 flex item-center center">
+        <button class="bck-btn">
+          <a href="customer.html" class="a-bck">Back</a>
+        </button>
+      </div>
+      <div class="mrgn1 width50 flex row none mrgn-lft-30" id="msg">
+        <span class="txt-2n5vmin width60 bold txt-shdw clr-02006D"
+          >Record Added Successfully!!!</span
+        >
+      </div>
+      <div class="height80 flex column item-center center width100">
+        <div class="height80 width60">
+          <div
+            class="flex column flex column item-center center bx-shdw-939393 pad-lft-2 pad2 height90"
+          >
+          <!-- <fieldset>
+            <legend>Name:</legend> -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                First Name <span class="clr-E6212A txt-2vmin">*</span></label
+              ><input
+                type="text"
+                id="first_name"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                onkeyup="removeExtraSpaces(this)"
+                required
+              />
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width100 flex mrgn-lft-30 none" id="err-first_name">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-first_name-span"
+                >Name is required</span
+              >
+            </div>
+            <!--  -->
+            <!-- middle name -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Middle Name </label
+              ><input
+                type="text"
+                id="middle_name"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+
+            <!-- end middle name -->
+            <!-- last name -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Last Name <span class="clr-E6212A txt-2vmin">*</span></label
+              ><input
+                type="text"
+                id="last_name"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width100 flex mrgn-lft-30 none"
+              id="err-last_name"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-last_name-span"
+                >Last Name is required</span
+              >
+            </div>
+            <!-- </fieldset> -->
+            <!-- end last name -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Date of Birth<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                placeholder=""
+                id="dob"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                oninput="checkDate()"
+                placeholder="dd-mm-yyyy"
+              />
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-dob">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-div-dob"
+                >Date is not Valid</span
+              >
+            </div>
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-req-dob"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-req-div-dob"
+                >Date of birth is required</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-day">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-day-div"
+                >Day is incorrect</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-month">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-month-div"
+                >Month is incorrect</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-year">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-year-div"
+                >Year should be in between 1924 - 2023</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-dob">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-dob-span"
+                >DOB is required</span
+              >
+            </div>
+            <!--  -->
+
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Contact No.<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="contact"
+                value="07867090028"
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-contact"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-contact-span"
+                >Contact number is required</span
+              >
+            </div>
+            <!--  -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Email <span class="clr-E6212A txt-2vmin">*</span></label
+              ><input
+                type="email"
+                id="email"
+                value=""
+                oninput="checkEmail()"
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+              />
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-email">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-email-span"
+                >Email is required</span
+              >
+            </div>
+
+            <!--  -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                House No<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="house_no"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-house_no"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-house_no-span"
+                >House No is required</span
+              >
+            </div>
+            <!--  -->
+            <!-- street name -->
+
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Street Name<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="street_name"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-street_name"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-street_name-span"
+                >Street Name is required</span
+              >
+            </div>
+            <!-- street name end -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Post Code<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="post_code"
+                value="ST4 2BH"
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-post_code"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-post_code-span"
+                >Post code is required</span
+              >
+            </div>
+            <!-- city -->
+            <!-- <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                City<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="city"
+                value="Stoke"
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                readonly
+              />
+            </div> -->
+            <!--error  -->
+            <!-- <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-city"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-city-span"
+                >Post code is required</span
+              >
+            </div> -->
+            <!-- end city -->
+            <!-- </fieldset> -->
+            <!--  -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Medical History</label
+              ><textarea
+                placeholder=""
+                id="record"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              ></textarea>
+            </div>
+
+            <!--  -->
+            <!-- medical record -->
+            <div class="mrgn1 width100 flex">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Allergy</label
+              ><textarea
+                placeholder="Allergy"
+                id="allergy"
+                value=""
+                class="txt-2n5vmin width60 rad2 bdr-none"
+                required
+                onkeyup="removeExtraSpaces(this)"
+              ></textarea>
+            </div>
+            <!-- end medical record -->
+          </div>
+        </div>
+        <div class="flex item-center center height10">
+          <button class="bck-btn" id="submit">
+            <span class="txt-2n5vmin a-bck bold">Submit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    async function removeExtraSpaces(val){
+      console.log('val ',val)
+      const id = val.id;
+
+      document.getElementById(id).value = val.value.replace(/  +/g, ' ');
+    }
+    async function checkEmail(){
+      const input = document.getElementById("email").value;
+      const regex_email =
+        /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        if (!regex_email.test(document.getElementById("email").value)) {
+        document.getElementById("err-email").style.display = "block";
+        console.log(document.getElementById("err-email"));
+        document.getElementById("err-email-span").innerHTML =
+          "Enter Valid Email e.g sample@example.com";
+
+      }else{
+        document.getElementById("err-email").style.display = "none";
+
+      }
+    }
+        async function leapYear(day, month, year) {
+      //This function is validation for leap year
+      if (year % 4 === 0 && day > 29 && year != 0) {
+        document.getElementById("err-dob").style.display = "block";
+        await setTimeout(() => {
+          document.getElementById("err-dob").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (year % 4 !== 0 && day > 28 && year != 00) {
+        return false;
+      } else if (year == 0 && day > 29) {
+        document.getElementById("err-dob").style.display = "block";
+        await setTimeout(() => {
+          document.getElementById("err-dob").style.display = "none";
+        }, 3000);
+        return false;
+      }
+
+      // else return true
+      else return true;
+      // }
+    }
+        async function checkDate() {
+      
+      const input = document.getElementById("dob").value;
+      if(input.length>10){
+        document.getElementById("dob").value = input.slice(0, 10);
+      }
+      //Validation for day
+      if (input.length == 2) {
+        if (input > 31 || input == 00) {
+          document.getElementById("err-day").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-day").style.display = "none";
+          }, 3000);
+          document.getElementById("dob").value = "";
+        } else
+          document.getElementById("dob").value =
+            document.getElementById("dob").value + "-";
+      }
+      //Validation for day and month
+
+      if (input.length == 5) {
+        const month = input.slice(-2);
+        const day = input.slice(0, 2);
+        if (month > 12 || month <= 00) {
+          document.getElementById("err-month").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-month").style.display = "none";
+          }, 3000);
+
+          document.getElementById("dob").value = input.slice(0, 3);
+        }else if (["02", 02].includes(month)) {
+          //Validation for Feb month and leap year
+
+          const dt_chk = await leapYear(day, month, 00);
+          console.log('dt chk ',)
+          if (dt_chk)
+            document.getElementById("dob").value =
+              document.getElementById("dob").value + "-";
+          else document.getElementById("dob").value = "";
+        } else{
+          document.getElementById("dob").value =
+              document.getElementById("dob").value + "-";
+        }
+      }
+
+      if (input.length == 10) {
+        const year = input.slice(-4);
+        const month = input.slice(3, 5);
+        const day = input.slice(0, 2);
+        let dt_check = true;
+        if ((year > "2023" || year > 2023) && (year < 1923 || year < "1923")) {
+          document.getElementById("err-year").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-year").style.display = "none";
+          }, 3000);
+          document.getElementById("dob".value) = input.slice(0, 6);
+        }
+        // Leap year
+        if ([02, "02"].includes(month)) {
+          dt_check = await leapYear(day, month, year);
+        }
+        if (dt_check)
+          document.getElementById("dob").value = document.getElementById(
+            "dob"
+          ).value;
+        else {
+          document.getElementById("dob").value = "";
+          document.getElementById("err-dob").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-dob").style.display = "none";
+          }, 3000);
+        }
+      }
+    }
+
+    document.querySelector("#submit").addEventListener("click", async () => {
+      //Validation
+      if (!valid_input()) {
+        alert("Please enter valid data and try again");
+      } else {
+        let customer = {
+          first_name: document.getElementById("first_name").value.trim(),
+          middle_name: document.getElementById("middle_name").value.trim(),
+          last_name: document.getElementById("last_name").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          dob: document.getElementById("dob").value,
+          contact: document.getElementById("contact").value.trim(),
+          house_no: document.getElementById("house_no").value.trim(),
+          street_name: document.getElementById("street_name").value.trim(),
+          post_code: document.getElementById("post_code").value.trim(),
+          record: document.getElementById("record").value.trim(),
+          allergy: document.getElementById("allergy").value.trim(),
+
+        };
+
+        const yo = await window.api.addCustomers(customer);
+        // await setTimeout(() => {
+        //   resetData();
+        //   document.getElementById("msg").style.display = "block";
+        //   console.log('settime out')
+        // }, 5000);
+      }
+    });
+    function resetData() {
+      document.getElementById("first_name").value = "";
+      document.getElementById("last_name").value = "";
+      document.getElementById("middle_name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("contact").value = "";
+      document.getElementById("house_no").value = "";
+      document.getElementById("street_name").value = "";
+      document.getElementById("post_code").value = "";
+      document.getElementById("dob").value = "";
+      document.getElementById("record").value = "";
+      document.getElementById("allergy").value = "";
+
+    }
+    function valid_input() {
+      var regex_name = /^[a-zA-Z ]{2,30}$/;
+      const regex_contact =
+        /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/;
+      const regex_email =
+        /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+      let chk = true;
+      if (document.getElementById("first_name").value.length <= 0) {
+        document.getElementById("err-first_name").style.display = "block";
+        chk = false;
+      }
+      if (document.getElementById("last_name").value.length <= 0) {
+        document.getElementById("err-last_name").style.display = "block";
+        chk = false;
+      }
+      if (document.getElementById("email").value.length <= 0) {
+        document.getElementById("err-email").style.display = "block";
+        chk = false;
+      }
+      if (!regex_email.test(document.getElementById("email").value)) {
+        document.getElementById("err-email").style.display = "block";
+        console.log(document.getElementById("err-email"));
+        document.getElementById("err-email-span").innerHTML =
+          "Enter Valid Email e.g sample@example.com";
+
+        chk = false;
+      }
+      if (document.getElementById("contact").value.length <= 0) {
+        document.getElementById("err-contact").style.display = "block";
+        chk = false;
+      }
+
+      if (!regex_contact.test(document.getElementById("contact").value)) {
+        document.getElementById("err-contact").style.display = "block";
+        document.getElementById("err-contact-span").innerText =
+          "Enter Valid Contact Number e.g +44674765399";
+        chk = false;
+      }
+      if (document.getElementById("address").value.length <= 0) {
+        document.getElementById("err-address").style.display = "block";
+        chk = false;
+      }
+      if (document.getElementById("post_code").value.length <= 0) {
+        document.getElementById("err-post_code").style.display = "block";
+        chk = false;
+      }
+
+      if (
+        !/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/gm.test(
+          document.getElementById("post_code").value
+        )
+      ) {
+        document.getElementById("err-post_code").style.display = "block";
+        document.getElementById("err-contact-span").innerText =
+          "Enter Valid Post Code e.g XX2 2XX";
+        chk = false;
+      }
+      if (document.getElementById("record").value.length <= 0) {
+        document.getElementById("err-record").style.display = "block";
+        chk = false;
+      }
+      return chk;
+    }
+  </script>
+</html>

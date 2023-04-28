@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" content="" />
+    <meta http-equiv="X-Content-Security-Policy" content="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Sales</title>
+  </head>
+  <body>
+    <div class="flex column item-center center bg-5E9BB0 width100 height100">
+      <div class="mrgn0n1 height10">
+        <button class="bck-btn">
+          <a href="dashboard.html" class="a-bck">Back</a>
+        </button>
+      </div>
+
+      <!-- <table  border="2" class="bx-shdw-939393 " id="table">
+
+     </table> -->
+      <div id="table" class="txt-center flex center">
+        <div class="height70">
+          <table border="2" class="bx-shdw-939393">
+            <thead>
+              <thead class="bg-B2E3A0">
+                <tr>
+                  <th>#</th>
+                  <th>Customer</th>
+                  <th>Cost</th>
+                  <th>Ship To</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+            </thead>
+
+            <tbody class="bg-8CBDA8 txt-center" id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="">
+        <button class="bck-btn">
+          <a href="./addSale.html" class="a-bck">&nbsp;Add&nbsp;</a>
+        </button>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const sales = await window.api.getSales();
+      let table = document.getElementById("tbody");
+      for (var i = 0; i < sales.length; i++) {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+        let td6 = document.createElement("td");
+        let td7 = document.createElement("td");
+        let td8 = document.createElement("td");
+        let view_btn = document.createElement("button");
+        let delete_btn = document.createElement("button");
+        view_btn.setAttribute("onclick", `viewSaleItems(${sales[i].id})`);
+        delete_btn.setAttribute("onclick", `deleteSale(${sales[i].id})`);
+        view_btn.style.background = "blue";
+        view_btn.style.padding = "5%";
+        view_btn.style.borderRadius = "2px";
+        view_btn.style.color = "white";
+        view_btn.style.fontSize = "3vmin";
+        view_btn.style.border = "none";
+        delete_btn.style.background = "red";
+        delete_btn.style.padding = "3%";
+        delete_btn.style.borderRadius = "2px";
+        delete_btn.style.color = "white";
+        delete_btn.style.fontSize = "3vmin";
+        delete_btn.style.border = "none";
+
+        let text1 = document.createTextNode(sales[i].id);
+        let text2 = document.createTextNode(sales[i].name);
+        let text3 = document.createTextNode(sales[i].total_cost);
+        let text4 = document.createTextNode(sales[i].ship_to);
+        let text5 = document.createTextNode("View");
+        let text6 = document.createTextNode("Delete");
+
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        td3.appendChild(text3);
+        td4.appendChild(text4);
+        view_btn.appendChild(text5);
+        delete_btn.appendChild(text6);
+        td5.appendChild(view_btn);
+        td6.appendChild(delete_btn);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tr.appendChild(td6);
+
+        table.appendChild(tr);
+      }
+    });
+
+    function viewSaleItems(index) {
+      localStorage.setItem("index_yo", index);
+      window.location.href = "sale_items.html";
+    }
+    async function deleteSale(index) {
+      if (confirm("Are you sure?") == true) {
+        await window.api.deleteSaleItems(index);
+        await window.api.deleteSale(index);
+        alert('Data Deleted Successfully!!!')
+      } else {
+        // text = "You canceled!";
+      }
+    }
+  </script>
+</html>

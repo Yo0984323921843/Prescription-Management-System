@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" content="" />
+    <meta http-equiv="X-Content-Security-Policy" content="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Add Sales</title>
+  </head>
+
+  <body onload="getStorageTotal()">
+    <div class="flex column item-center center bg-5E9BB0 width100 height100">
+      <div class="mrgn0n1 height10 flex item-center center">
+        <button class="bck-btn">
+          <a href="sales.html" class="a-bck">Back</a>
+        </button>
+      </div>
+      <div
+        class="mrgn0n1 height10 flex item-center center none"
+        id="add-drug-div"
+      >
+        <button onclick="addMoreDrug()" id="add-drug" class="bx-shdw-939393">
+          Add&nbsp;More&nbsp;Drug
+        </button>
+      </div>
+      <div
+        class="width50 item-center flex row none mrgn-lft-30 left-bdr-orange"
+        id="err-empty"
+      >
+        <span class="txt-3n5vmin width60 bold clr-02006D mrgn-lft-10 clr-red"
+          >ID verification has been failed.
+        </span>
+      </div>
+      <div
+        class="width50 item-center flex row none mrgn-lft-30 left-bdr-red"
+        id="id_proof"
+      >
+        <span class="txt-2vmin width60 bold clr-02006D mrgn-lft-10"
+          >Customer under 18 are not allowed.</span
+        >
+      </div>
+      <div
+        class="width50 item-center flex row none mrgn-lft-30 left-bdr-red"
+        id="err-div-continue"
+      >
+        <span class="txt-2n5vmin width60 bold clr-02006D mrgn-lft-10"
+          >Click on <bold>Continue</bold> -to continue with remaining medicines.
+        </span>
+      </div>
+
+      <div
+        class="width50 item-center flex row none mrgn-lft-30 left-bdr-red"
+        id="div-drug_string"
+      >
+        <span
+          class="txt-2vmin width60 bold clr-02006D mrgn-lft-10"
+          id="drug_string"
+        ></span>
+      </div>
+      <div
+        class="width50 item-center flex row none mrgn-lft-30 left-bdr-green"
+        id="msg"
+      >
+        <span class="txt-2vmin width60 bold clr-02006D mrgn-lft-10"
+          >Record Added Successfully!!!</span
+        >
+      </div>
+      <div
+        class="width50 flex row none mrgn-lft-30 left-bdr-red"
+        id="record_add"
+      >
+        <span class="txt-2vmin width60 bold clr-02006D mrgn-lft-10"
+          >Add Drug, Price and Quantity first then click on Add More Drug</span
+        >
+      </div>
+      <div class="width50 flex row none mrgn-lft-30" id="availability">
+        <span class="txt-2vmin width60 bold clr-E6212A mrgn-lft-10"></span>
+      </div>
+      <div class="height80 flex column item-center center width100">
+        <div class="height80 width60">
+          <div
+            class="flex column flex column item-center center bx-shdw-939393 pad-lft-2 pad2 height90"
+          >
+            <div class="mrgn1 width100 flex" id="div-customer">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Customer Name <span class="clr-E6212A txt-2vmin">*</span></label
+              ><select
+                id="customer"
+                onclick="getCustomers()"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+                onchange="selectCustomer()"
+              >
+                <option value="">Select Customer</option>
+              </select>
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-customer"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-customer-span"
+                >Customer is required</span
+              >
+            </div>
+            <!--  -->
+            <div class="mrgn1 width100 flex" id="div-drug">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Drug <span class="clr-E6212A txt-2vmin">*</span></label
+              ><select
+                id="drug"
+                onclick="getDrugs()"
+                onchange="selectDrug()"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+                onblur="setAddMoreDrugBtn()"
+              >
+                <option value="">Select Drug</option>
+              </select>
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-drug">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-drug-span"
+                >Drug is required</span
+              >
+            </div>
+            <div class="mrgn1 width100 flex" id="div-quantity">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Quantity<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="number"
+                id="quantity"
+                min="1"
+                value="1"
+                max="100"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+                onblur="setAddMoreDrugBtn()"
+                oninput="calculateTotal()"
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-quantity"
+            >
+              <span class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                >Quantity is required</span
+              >
+            </div>
+            <div class="mrgn1 width100 flex" id="div-price">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Price<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="number"
+                id="price"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+                readonly
+                onblur="setAddMoreDrugBtn()"
+              />
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-price">
+              <span class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                >Price is required</span
+              >
+            </div>
+            <!--  -->
+
+            <div class="mrgn1 width100 flex" id="div-ship_to">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Ship To<span class="clr-E6212A txt-2vmin">*</span> </label
+              ><input
+                type="text"
+                id="ship_to"
+                value="1, Haywood street"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+              />
+            </div>
+            <!--error  -->
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-ship_to"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-ship_to-span"
+                >Address is required</span
+              >
+            </div>
+            <div class="mrgn1 width100 flex" id="div-total">
+              <label class="txt-3n5vmin width40 flex item-center clr-02006D">
+                Total <span class="clr-E6212A txt-2vmin"></span> </label
+              ><input
+                type="number"
+                id="total"
+                value="0.0"
+                class="txt-3n5vmin width60 rad2 bdr-none"
+                required
+                readonly
+              />
+            </div>
+            <div
+              class="mrgn1 width50 flex item-center center none"
+              id="div-dob"
+            >
+              <label class="width40 mrgn1">
+                <span class="txt-3n5vmin bold clr-02006D txt-2vmin">
+                  Birth Date
+                </span> </label
+              ><input
+                type="text"
+                id="dob"
+                value=""
+                class="txt-3n5vmin width60 rad2 bdr-none mrgn1"
+                required
+                oninput="checkDate()"
+                placeholder="dd-mm-yyyy"
+              />
+            </div>
+            <!--error  -->
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-dob">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-div-dob"
+                >Date is not Valid</span
+              >
+            </div>
+            <div
+              class="mrgn1 width50 flex row none mrgn-lft-30"
+              id="err-req-dob"
+            >
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-req-div-dob"
+                >Date of birth is required</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-day">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-day-div"
+                >Day is incorrect</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-month">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-month-div"
+                >Month is incorrect</span
+              >
+            </div>
+            <div class="mrgn1 width50 flex row none mrgn-lft-30" id="err-year">
+              <span
+                class="txt-2n5vmin width60 bold txt-shdw clr-E6212A"
+                id="err-year-div"
+                >Year should be in between 1924 - 2023</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex item-center center height10" id="div-submit">
+          <button class="bck-btn bg-green" id="submit">
+            <span class="txt-2n5vmin a-bck bold">Submit</span>
+          </button>
+        </div>
+        <div class="flex space-between width30 height40 none" id="div-continue">
+          <button class="nw-btn height100" onclick="continueProcess()">
+            <span class="">Continue</span>
+          </button>
+          <button class="nw-btn bg-red height100" onclick="cancelProcess()">
+            <span class="">Cancel</span>
+          </button>
+        </div>
+        <!-- <div class="flex item-center none center height10" id="div-cancel">
+          <button class="bck-btn" onclick="cancelProcess()">
+            <span class="txt-2n5vmin a-bck bold">Cancel</span>
+          </button>
+        </div> -->
+        <div class="flex item-center center none height10" id="div-verify">
+          <button class="bck-btn" id="verify" onclick="verifyAge()">
+            <span class="txt-2n5vmin a-bck bold">Verify</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    let check_data;
+    var dob_flag = false;
+    localStorage.clear();
+      async function selectCustomer() {
+      const cust_id = document.getElementById("customer").value;
+      const all_customers = await window.api.getcustomers();
+      const cust_name = await all_customers.filter(
+        (item) => item["id"] == cust_id
+      );
+      localStorage.setItem("selected_customer", JSON.stringify(cust_name));
+      document.getElementById("customer").disabled = true;
+    }
+    async function checkDate() {
+      
+      const input = document.getElementById("dob").value;
+      //Validation for day
+   
+      if (input.length == 2) {
+        if (input > 31 || input == 00) {
+          document.getElementById("err-day").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-day").style.display = "none";
+          }, 3000);
+          document.getElementById("dob").value = "";
+        } else
+          document.getElementById("dob").value =
+            document.getElementById("dob").value + "-";
+      }
+      //Validation for day and month
+
+      if (input.length == 5) {
+        const month = input.slice(-2);
+        const day = input.slice(0, 2);
+        if (month > 12 || month <= 00) {
+          document.getElementById("err-month").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-month").style.display = "none";
+          }, 3000);
+
+          document.getElementById("dob").value = input.slice(0, 2);
+        }
+        if (["02", 02].includes(month)) {
+          //Validation for Feb month and leap year
+
+          const dt_chk = await leapYear(day, month, 00);
+          if (dt_chk)
+            document.getElementById("dob").value =
+              document.getElementById("dob").value + "-";
+          else document.getElementById("dob").value = "";
+        } else
+          document.getElementById("dob").value =
+            document.getElementById("dob").value + "-";
+      }
+
+      if (input.length == 10) {
+        const year = input.slice(-4);
+        const month = input.slice(3, 5);
+        const day = input.slice(0, 2);
+        let dt_check = true;
+        if ((year > "2023" || year > 2023) && (year < 1923 || year < "1923")) {
+          document.getElementById("err-year").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-year").style.display = "none";
+          }, 3000);
+          document.getElementById("dob".value) = input.slice(0, 6);
+        }
+        // Leap year
+        if ([02, "02"].includes(month)) {
+          dt_check = await leapYear(day, month, year);
+        }
+        if (dt_check)
+          document.getElementById("dob").value = document.getElementById(
+            "dob"
+          ).value;
+        else {
+          document.getElementById("dob").value = "";
+          document.getElementById("err-dob").style.display = "block";
+          await setTimeout(() => {
+            document.getElementById("err-dob").style.display = "none";
+          }, 3000);
+        }
+      }
+    }
+
+    async function leapYear(day, month, year) {
+      //This function is validation for leap year
+      if (year % 4 === 0 && day > 29 && year != 0) {
+        document.getElementById("err-dob").style.display = "block";
+        await setTimeout(() => {
+          document.getElementById("err-dob").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (year % 4 !== 0 && day > 28 && year != 00) {
+        return false;
+      } else if (year == 0 && day > 29) {
+        document.getElementById("err-dob").style.display = "block";
+        await setTimeout(() => {
+          document.getElementById("err-dob").style.display = "none";
+        }, 3000);
+        return false;
+      }
+
+      // else return true
+      else return true;
+      // }
+    }
+    async function getStorageTotal() {
+      const strg = JSON.parse(localStorage.getItem("drug_data"));
+      // localStorage.clear();
+      if (![null, "", undefined].includes(strg)) {
+        let sum = strg.reduce(
+          (total, num) =>
+            parseFloat((total + parseFloat(num.total)).toFixed(2)),
+          0.0
+        );
+        return parseFloat(sum);
+      } else return 0.0;
+      // const total = await calculateTotal();
+      // document.getElementById('total').value = total;
+
+      // return 0.0;
+    }
+    async function calculateTotal() {
+      let price = document.getElementById("price").value;
+      let quantity = document.getElementById("quantity").value;
+      const prev_sum = await getStorageTotal();
+      if (
+        ![undefined, null, "", NaN, 0].includes(price) &&
+        ![undefined, null, "", NaN, 0].includes(quantity) &&
+        ![undefined, null, "", NaN, 0].includes(prev_sum)
+      ) {
+        const temp = parseFloat(
+          (
+            parseFloat(prev_sum) +
+            parseFloat(price) * parseFloat(quantity)
+          ).toFixed(2)
+        );
+        document.getElementById("total").value = parseFloat(temp);
+        return temp;
+      } else if (
+        [undefined, null, "", NaN, 0].includes(price) &&
+        [undefined, null, "", NaN, 0].includes(quantity) &&
+        ![undefined, null, "", NaN, 0].includes(prev_sum)
+      ) {
+        document.getElementById("total").value = parseFloat(
+          prev_sum.toFixed(2)
+        );
+
+        return prev_sum;
+      } else if (
+        ![undefined, null, "", NaN, 0].includes(price) &&
+        ![undefined, null, "", NaN, 0].includes(quantity) &&
+        [undefined, "", NaN, 0].includes(prev_sum)
+      ) {
+        const temp = parseFloat(
+          (parseFloat(price) * parseFloat(quantity)).toFixed(2)
+        );
+        document.getElementById("total").value = parseFloat(temp);
+        return temp;
+      } else if (
+        ![undefined, null, "", NaN, 0].includes(price) &&
+        [undefined, null, "", NaN, 0].includes(quantity) &&
+        ![undefined, "", NaN, 0].includes(prev_sum)
+      ) {
+        document.getElementById("total").value = parseFloat(
+          prev_sum.toFixed(2)
+        );
+
+        return prev_sum;
+      } else {
+        document.getElementById("total").value = 0.0;
+        return 0.0;
+      }
+    }
+    async function setAddMoreDrugBtn() {
+      if (
+        !["", null, undefined, 0].includes(
+          document.getElementById("drug").value
+        ) &&
+        !["", null, undefined, 0].includes(
+          document.getElementById("price").value
+        ) &&
+        !["", null, undefined, 0].includes(
+          document.getElementById("quantity").value
+        )
+      ) {
+        document.getElementById("add-drug-div").style.display = "block";
+      }
+    }
+
+    async function selectDrug() {
+      const drugs = await window.api.drugs();
+      const drug_id = document.getElementById("drug").value;
+      const item = drugs.filter((item) => item.id == drug_id);
+      const available = ["Y", "y"];
+      //First check for availability or recommend for nearby store
+      // const store_name = JSON.parse(localStorage.getItem('store_name'));
+
+      if (available.includes(item[0].stoke)) {
+        // document.getElementById('add-drug-div').style.display = 'block';
+        document.getElementById("price").value = item[0].price;
+        await setAddMoreDrugBtn();
+        const total = await calculateTotal();
+        document.getElementById("total").value = total;
+      } else {
+        await setAddMoreDrugBtn();
+        await setTimeout(showAvailability, 100);
+        //fenton- 5 min hanley-7,longoton-10min,tunstall-11
+        const nearby_store = await nearByStore(item);
+        document.getElementById(
+          "availability"
+        ).innerHTML = `This medicine is not available in this store check in ${nearby_store} store`;
+
+        await resetData();
+        document.getElementById("add-drug-div").style.display = "none";
+        setTimeout(hideAvailability, 5000);
+      }
+
+      }
+    async function nearByStore(item) {
+      const available = ["Y", "y"];
+      const fenton = item[0].fenton;
+      const hanley = item[0].hanley;
+      const longton = item[0].longton;
+      const tunstall = item[0].tunstall;
+
+      return available.includes(item[0].fenton)
+        ? "Fenton"
+        : available.includes(item[0].hanley)
+        ? "Hanley"
+        : available.includes(item[0].longton)
+        ? "Longton"
+        : "Tunstall";
+    }
+    async function showAvailability() {
+      document.getElementById("availability").style.display = "block";
+    }
+    async function hideAvailability() {
+      document.getElementById("drug").value = "";
+      document.getElementById("availability").style.display = "none";
+    }
+    async function getDrugs() {
+      const drugs = await window.api.drugs();
+      localStorage.setItem("all_drugs", JSON.stringify(drugs));
+      const sele_drugs = await document.getElementById("drug");
+      for (i = 0; i < drugs.length; i++) {
+        let option = document.createElement("option");
+        let text = document.createTextNode(drugs[i].drug_name);
+        option.appendChild(text);
+        option.value = drugs[i].id;
+        // delete_btn.style.border = "none";
+        sele_drugs.appendChild(option);
+      }
+    }
+    async function getCustomers() {
+      const sele_customers = await document.getElementById("customer");
+      const customers = await window.api.getcustomers();
+
+      for (i = 0; i < customers.length; i++) {
+        const option = document.createElement("option");
+        const text = document.createTextNode(customers[i].name);
+        option.appendChild(text);
+        option.value = customers[i].id;
+
+        // delete_btn.style.border = "none";
+        sele_customers.appendChild(option);
+      }
+    }
+
+    document.querySelector("#submit").addEventListener("click", async () => {
+      document.getElementById("add-drug-div").style.display = "none";
+
+      //Validation
+      if (!valid_input()) {
+        alert("Please enter valid data and try again");
+      } else {
+        const total = document.getElementById("total").value;
+        const ship_to = document.getElementById("ship_to").value;
+        const price = document.getElementById("price").value;
+        const quantity = document.getElementById("quantity").value;
+        const customer = document.getElementById("customer").value;
+        const drug = document.getElementById("drug").value;
+        const strg_drug_data = JSON.parse(localStorage.getItem("drug_data"));
+        const temp = parseFloat(
+          (parseFloat(price) * parseFloat(quantity)).toFixed(2)
+        );
+        const all_drugs = JSON.parse(localStorage.getItem("all_drugs"));
+        const cond = [null, undefined, "", 0];
+        let recent_drug = null;
+        if (!cond.includes(drug)) {
+          //If recent data exist
+          const temp_id_check = all_drugs.filter((item) => item.id == drug);
+          //Preparing recent data
+          recent_drug = {
+            drug: drug,
+            price: parseFloat(price),
+            quantity: parseInt(quantity),
+            total: parseFloat(temp),
+            id_check: temp_id_check[0].id_check,
+            drug_name: temp_id_check[0].drug_name,
+          };
+        }
+        let final_cost = 0.0;
+
+        let sale_items = [];
+        //Merge current data with localstaorage if data exist in localstorage
+        if (![null, undefined, "", 0].includes(strg_drug_data)) {
+          if (![null, undefined, "", {}, []].includes(recent_drug)) {
+            //If recent data and storage data exist
+            strg_drug_data.push(recent_drug);
+          }
+          //Adding new drug
+          sale_items = strg_drug_data.reduce((a, c) => {
+            let found = a.find((el) => el.drug === c.drug);
+            if (found) {
+              found.total += parseFloat(c.total);
+              found.quantity += parseFloat(c.quantity);
+            } else {
+              a.push(c);
+            }
+            return a;
+          }, []);
+        } else {
+          if (![null, undefined, {}, 0, ""].includes(recent_drug)) {
+            sale_items.push(recent_drug);
+          }
+          //  sale_items = JSON.parse(localStorage.getItem('drug_data'));
+        }
+        //Creating data to submit i.e sale with sale items
+        const final_data = {
+          sale_items: sale_items,
+          final_cost: total,
+          customer_id: customer,
+          ship_to: ship_to,
+          // id_checked:'Checked'
+        };
+        localStorage.setItem("final_data", JSON.stringify(final_data));
+
+        //Now check for DOB functionality if id check
+
+        const temp_id = await sale_items.find((element) =>
+          ["Y", "y"].includes(element.id_check)
+        );
+
+        if (!["", null, undefined, 0, []].includes(temp_id)) {
+          //Hide all divs except DOB
+          //dicplay customer under a8 are not allowd
+          document.getElementById("id_proof").style.display = "block";
+          document.getElementById("div-customer").style.display = "none";
+          document.getElementById("div-drug").style.display = "none";
+          document.getElementById("div-quantity").style.display = "none";
+          document.getElementById("div-price").style.display = "none";
+          document.getElementById("div-ship_to").style.display = "none";
+          document.getElementById("div-total").style.display = "none";
+          document.getElementById("div-submit").style.display = "none";
+          document.getElementById("div-dob").style.display = "block";
+          document.getElementById("div-verify").style.display = "block";
+        } else {
+          //where id check is not required
+          // window.location.href = "prescription.html";
+          await continueProcess();
+        }
+
+        // await addMoreDrug();
+        // dont do add more drug just get local storage data and add this record also and validate it then send
+      }
+    });
+
+    async function verifyAge() {
+      if (confirm("Did you enter correct date?") == true) {
+        const hehe = document.getElementById("dob");
+        hehe.focus();
+        const dob_dt = document.getElementById("dob").value;
+        var dob = new Date(dob_dt);
+        //calculate month difference from current date in time
+        var month_diff = Date.now() - dob.getTime();
+
+        //convert the calculated difference in date format
+        var age_dt = new Date(month_diff);
+
+        //extract year from date
+        var year = age_dt.getUTCFullYear();
+
+        //now calculate the age of the user
+        var age = Math.abs(year - 1970);
+        //Fetch final data from storage
+        const final_data = JSON.parse(localStorage.getItem("final_data"));
+
+        if (age < 18) {
+          //Remove that medicine from items who need id check
+          localStorage.removeItem("final_data");
+          const temp_data = final_data.sale_items.filter(
+            (item) => !["y", "Y"].includes(item.id_check)
+          );
+          //Check if medicines with no id check are exist
+          if (temp_data.length == 0) {
+            //If there is no any medicine left then just redirect to addSale page
+
+            document.getElementById("err-empty").style.display = "block";
+            document.getElementById("div-verify").style.display = "none";
+
+            setTimeout(() => {
+              document.getElementById("div-continue").style.display = "none";
+            }, 1000);
+            setTimeout(() => {
+              localStorage.clear();
+              document.getElementById("err-empty").style.display = "none";
+              window.location.href = "addSale.html";
+            }, 9000);
+          } else {
+            //Creating drug string to display
+            //Find out all removed drugs
+            const removed_data = final_data.sale_items.filter((item) =>
+              ["y", "Y"].includes(item.id_check)
+            );
+            //Create string for medicine names which has been removed
+            if (![undefined, null, 0, "", {}, []].includes(removed_data)) {
+              const drug_names = removed_data.map(function (item) {
+                return item["drug_name"];
+              });
+              //Coverting array to string to show string
+              const drugs_string = drug_names.toString();
+              //Verification failed msg
+              document.getElementById("err-empty").style.display = "block";
+              //display customer under 18 are not allowed
+              document.getElementById("id_proof").style.display = "block";
+              setTimeout(() => {
+                document.getElementById("div-drug_string").style.display =
+                  "block";
+                document.getElementById("id_proof").style.display = "none";
+
+                document.getElementById(
+                  "drug_string"
+                ).innerHTML = `Medicines ${drugs_string} has been removed.`;
+              }, 5000);
+
+              setTimeout(() => {
+                document.getElementById("div-drug_string").style.display =
+                  "none";
+
+                // document.getElementById("err-empty").style.display = "none";
+              }, 3000);
+              //Verify button
+              document.getElementById("div-verify").style.display = "none";
+
+              await setTimeout(() => {
+                document.getElementById("div-drug_string").style.display =
+                  "none";
+                document.getElementById("err-div-continue").style.display =
+                  "block";
+              }, 10000);
+            }
+
+            let temp_final_cost = temp_data.reduce(
+              (total, num) =>
+                parseFloat((total + parseFloat(num.total)).toFixed(2)),
+              0.0
+            );
+
+            // document.getElementById("err-div-continue").style.display = "block";
+            // document.getElementById("err-empty").style.display = "block";
+
+            document.getElementById("div-continue").style.display = "block";
+
+            //Remove previous sale item and add new data
+            delete final_data.sale_items;
+            final_data.sale_items = temp_data;
+
+            //Remove previous total cost and add new
+            delete final_data.final_cost;
+            final_data.final_cost = temp_final_cost;
+
+            localStorage.removeItem("drug_data");
+            localStorage.removeItem("all_drugs");
+            localStorage.setItem("final_data", JSON.stringify(final_data));
+          } //end for my else
+
+       
+        } else {
+          //Customer is more than 18
+          //Create prescription and insert data into table
+          await continueProcess();
+        }
+      } else {
+        document.getElementById("dob").value = "";
+        document.getElementById("dob").focus();
+      }
+    }
+
+    async function continueProcess() {
+      //First insert data into table
+      const drugs = await JSON.parse(localStorage.getItem("final_data"));
+      const customer = await JSON.parse(
+        localStorage.getItem("selected_customer")
+      );
+  // window.location.href = "prescription.html";
+
+      const send_data = {
+        customer_id: customer[0].id,
+        final_cost: drugs.final_cost,
+        ship_to: drugs.ship_to + " " + customer[0].post_code,
+        sale_items: drugs.sale_items,
+      };
+      setTimeout(async ()=>{
+     await window.api.addSales(send_data);
+      },1000)
+      alert("Entry has been made for you. You can take receipt")
+      window.location.href = "prescription.html"
+      /*
+     const last_id =  await window.api.getLastId();
+     setTimeout(async()=>{
+      const sale_items = {sale_items : send_data.sale_items, last_id:last_id[0]['MAX(id)']}
+     await window.api.addSaleItems(sale_items)
+
+     },3000)  */
+     //add sale items
+    //  alert(`Entry has been made. You can download receipt`)
+    // alert('Entry has been made for you. You can take receipt');
+
+  }
+
+    async function cancelProcess() {
+      localStorage.clear();
+      window.location.href = "addSale.html";
+    }
+    async function addMoreDrug() {
+      const drug = document.getElementById("drug").value;
+      const price = parseFloat(document.getElementById("price").value);
+      const quantity = parseInt(document.getElementById("quantity").value);
+      const strg = JSON.parse(localStorage.getItem("drug_data"));
+      //get id check
+      const all_drugs = JSON.parse(localStorage.getItem("all_drugs"));
+      const id_check = all_drugs.filter((item) => item.id == drug);
+
+      if ([null, undefined, "", 0].includes(id_check)) {
+        document.getElementById("dob").style.display = "block";
+      }
+      if (
+        ![undefined, "", null, NaN, 0].includes(drug) &&
+        ![undefined, "", null, NaN, 0].includes(price) &&
+        ![undefined, "", null, NaN, 0].includes(quantity)
+      ) {
+        const strg_total_temp = parseFloat(
+          parseFloat(price) * parseFloat(quantity).toFixed(2)
+        );
+        // strg_total = parseFloat(strg_total) + parseFloat(strg_total_temp);
+        const drug_data = {
+          drug: drug,
+          price: parseFloat(price),
+          quantity: parseFloat(quantity),
+          total: parseFloat(strg_total_temp),
+          id_check: id_check[0].id_check,
+          drug_name: id_check[0].drug_name,
+        };
+        if ([undefined, "", null].includes(strg)) {
+          let arr = [];
+          arr.push(drug_data);
+          localStorage.setItem("drug_data", JSON.stringify(arr));
+        } else {
+          strg.push(drug_data);
+          //Sum price and quantity with same id
+          const yo = strg.reduce((a, c) => {
+            let found = a.find((el) => el.drug === c.drug);
+            if (found) {
+              found.total += parseFloat(c.total);
+              found.quantity += parseFloat(c.quantity);
+            } else {
+              a.push(c);
+            }
+            return a;
+          }, []);
+
+          localStorage.setItem("drug_data", JSON.stringify(yo));
+        }
+        await resetData();
+        setTimeout(displayMsg, 1000);
+        setTimeout(hideMsg, 3000);
+      } else {
+        document.getElementById("record_add").style.display = "block";
+        setTimeout(hideMsg1, 3000);
+      }
+    }
+
+    function hideMsg1(id) {
+      document.getElementById("record_add").style.display = "none";
+    }
+    function hideMsg() {
+      document.getElementById("msg").style.display = "none";
+    }
+    function displayMsg() {
+      document.getElementById("msg").style.display = "block";
+    }
+    function resetData() {
+      document.getElementById("drug").value = "";
+      document.getElementById("price").value = 0.0;
+      document.getElementById("quantity").value = 1;
+    }
+    function valid_input() {
+      let chk = true;
+      const cond = [null, "", NaN, undefined, 0];
+      // console.log('yoyoyo ',document.getElementById("dob").style.display )
+      // if (document.getElementById("dob").style.display = 'block') {
+      //   if (cond.includes(document.getElementById('dob').value)) {
+      //     document.getElementById('err-req-dob').style.display = 'block';
+      //     setTimeout(() => {
+      //       document.getElementById("err-req.dob").style.display = "none";
+      //     }, 5000);
+      //     chk = false;
+      //   }
+      // }
+      const selected_customer = JSON.parse(
+        localStorage.getItem("selected_customer")
+      );
+
+      if (cond.selected_customer) {
+        document.getElementById("err-customer").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("err-customer").style.display = "none";
+        }, 5000);
+        chk = false;
+      }
+      const strg_drugs = JSON.parse(localStorage.getItem("drug_data"));
+      if (
+        cond.includes(document.getElementById("drug").value) &&
+        cond.includes(strg_drugs)
+      ) {
+        document.getElementById("err-drug").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("err-drug").style.display = "none";
+        }, 5000);
+        chk = false;
+      }
+      if (
+        cond.includes(
+          document.getElementById("price").value && cond.includes(strg_drugs)
+        )
+      ) {
+        document.getElementById("err-price").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("err-price").style.display = "none";
+        }, 5000);
+        chk = false;
+      }
+      if (
+        cond.includes(parseInt(document.getElementById("quantity").value)) &&
+        cond.includes(strg_drugs)
+      ) {
+        document.getElementById("err-quantity").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("err-quantity").style.display = "none";
+        }, 5000);
+        chk = false;
+      }
+      if (cond.includes(document.getElementById("ship_to").value)) {
+        document.getElementById("err-ship_to").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("err-ship_to").style.display = "none";
+        }, 5000);
+        chk = false;
+      }
+      return chk;
+    }
+  </script>
+</html>

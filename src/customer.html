@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content=""
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content=""
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>customers</title>
+  </head>
+  <body>
+  <div class="flex column item-center center bg-5E9BB0 width100 height100">
+    <div class="mrgn0n1 height10" >
+      <button class="bck-btn">  <a href="dashboard.html" class="a-bck">Back</a></button>
+     </div>
+  
+    
+     <!-- <table  border="2" class="bx-shdw-939393 " id="table">
+
+     </table> -->
+     <div id="table" class=" txt-center flex center">
+      <div class="height70">
+    <table border="2" class="bx-shdw-939393"  >
+      <thead>
+        <thead class="bg-B2E3A0">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Mobile Number</th>
+            <th>Email Id</th>
+            <th>Address</th>
+            <th>History</th>
+            <th>Allergy</th>
+
+
+
+          </tr>
+        </thead>
+      <tbody class="bg-8CBDA8 txt-center" id="tbody">
+          
+      </tbody>
+    </table></div>
+  
+  </div>
+  <div class="" >
+    <button class="bck-btn">  <a href="./addCustomer.html" class="a-bck">&nbsp;New&nbsp;</a></button>
+   </div>
+  </div>
+
+
+  </body>
+  <script>
+
+
+  document.addEventListener('DOMContentLoaded',async()=>{
+
+    const customers = await window.api.getcustomers()
+    console.log('custt ',customers);
+    let table = document.getElementById('tbody');
+for (var i = 0; i < customers.length; i++){
+    let tr = document.createElement('tr');
+    let td1 = document.createElement('td');
+    let td2 = document.createElement('td');
+    let td3 = document.createElement('td');
+    let td4 = document.createElement('td');
+    let td5 = document.createElement('td');
+    let td6 = document.createElement('td');
+    let td7 = document.createElement('td');
+    let td8 = document.createElement('td');
+
+
+    let text1 = document.createTextNode(customers[i].id);
+    //  const temp_name = await customers[i].first_name+" "+customers[i].middle_name+" "+customers[i].last_name
+    // console.log(temp_name)
+    let text2 = document.createTextNode(customers[i].name);
+    let text3 = document.createTextNode(customers[i].dob);
+    let text4 = document.createTextNode(customers[i].mobile_no);
+    let text5 = document.createTextNode(customers[i].email_id);
+    // const temp = await customers[i].house_no +" "+customers[i].street_name+" "+customers[i].post_code+" "+customers[i].city
+  //  console.log(temp)
+    let text6 = document.createTextNode(customers[i].address);
+    let text7 = document.createTextNode(customers[i].history);
+    let text8 = document.createTextNode(customers[i].allergy);
+
+
+    td1.appendChild(text1);
+    td2.appendChild(text2);
+    td3.appendChild(text3);
+    td4.appendChild(text4);
+    td5.appendChild(text5);
+    td6.appendChild(text6);    
+    td7.appendChild(text7);
+    td8.appendChild(text8);
+
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+    tr.appendChild(td5);
+    tr.appendChild(td6);
+    tr.appendChild(td7);
+    tr.appendChild(td8);
+
+
+    table.appendChild(tr);
+}
+// table.appendChild(table);
+    
+
+  })
+
+  </script>
+</html>

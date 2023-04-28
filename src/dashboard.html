@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'"
+    /> -->
+    <meta http-equiv="Content-Security-Policy" content="" />
+    <meta http-equiv="X-Content-Security-Policy" content="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Prescription Management System</title>
+  </head>
+  <body>
+    <div class="bg-8CBDA8 flex column maindiv">
+      <div class="bg-312DEA height10 width100 flex item-center rad2">
+        <div class="width35 flex height97 item-center">
+          <div class="logo">.</div>
+          <div class="width60">
+            <span class="txt-3n5vmin clr-FFFFFF">PharmaZeal</span>
+          </div>
+        </div>
+        <div class="width50 flex column start">
+          <span class="txt-3n5vmin clr-FFFFFF">Dashboard</span>
+          <span class="txt-2vmin clr-FFFFFF">Admin | Stoke</span>
+        </div>
+        <div class="width15 height97 flex column">
+          <div class="profile">.</div>
+          <div class="online"></div>
+          <span class="txt-2vmin clr-FFFFFF">Yogita Sanap</span>
+        </div>
+      </div>
+      <div class="flex width100 height90">
+        <div
+          class="flex column width15 item-center center bg-5E9BB0 rad2 mrgn0n1"
+        >
+          <div class="nav-link"> <button class="side-btn"> </button><span class="txt-2vmin bold">Users</span></div>
+          <div class="nav-link">
+             <!-- <button class="side-btn"> </button><span class="txt-2vmin bold">Customers</span> -->
+            <a class="side-btn" id="drugs" onclick="displayDrugs" href="./customer.html"><span class="txt-2vmin bold">Customers</span> </a>
+
+          </div>
+          <div class="nav-link">
+             <button class="side-btn"> </button><span class="txt-2vmin bold">Suppliers</span>
+          </div>
+          <div class="nav-link">
+            <a class="side-btn" id="drugs" onclick="displayDrugs" href="./drugs.html"><span class="txt-2vmin bold">Drugs</span> </a>
+            </div>
+            <div class="nav-link">
+              <a class="side-btn" id="drugs" href="./sales.html"><span class="txt-2vmin bold">Sales</span> </a>
+              </div>
+          <!-- <div class="nav-link"> <button class="side-btn"> </button><span class="txt-2vmin bold">Sales</span></div> -->
+          <div class="nav-link">
+             <button class="side-btn"> </button><span class="txt-2vmin bold">Purchases</span>
+          </div>
+          <div class="nav-link">
+             <button class="side-btn"> </button><span class="txt-2vmin bold">Demand & Supply</span>
+          </div>
+        </div>
+
+        <div class="width85 mrgn0n1 height97 flex column">
+          <div
+            class="height30 width90 bg-B2E3A0 rad-8 mrgn0n1 flex flex item-center center"
+          >
+            <div class="width60 flex  height97 ">
+              <div class="width40 height97 flex column">
+                <div class="width100 height10 flex item-center ">
+                  <span class="bold txt-3n5vmin mrgn-lft-15">Revenue <span class="bold txt-2vmin left-bdr-green"> &nbsp; 10000</span></span> 
+                </div>
+                <div class="width100 height90 canvas-div">
+                  <canvas id="revenue" height="30vh" width="30vw" class=""></canvas>
+                </div>
+              </div>
+
+              <div class="width20 height90 flex center mrgn-top-1p5">
+                <div class="height90 width100">
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 mrgn-top-1p5">
+                    <div class="height97 width15 bg-FF005F"></div>
+                    <div class="width80 mrgn-lft-15  ">
+                      <span class="clr-FF005F bold txt-2vmin">Lybrel</span>
+                    </div>
+                  </div>
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 ">
+                    <div class="height97 width15 bg-98D33B"></div>
+                    <div class="width80 mrgn-lft-15 ">
+                      <span class="clr-98D33B bold txt-2vmin">Keppra</span>
+                    </div>
+                  </div>
+                 
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 ">
+                    <div class="height97 width15 bg-FFCA02"></div>
+                    <div class="width80 mrgn-lft-15 ">
+                      <span class="clr-FFCA02 bold txt-2vmin">Gaunfacine</span>
+                    </div>
+                  </div>
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 ">
+                    <div class="height97 width15 bg-FF8500"></div>
+                    <div class="width80 mrgn-lft-15 ">
+                      <span class="clr-FF8500 bold txt-2vmin">Topiramate</span>
+                    </div>
+                  </div>
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 ">
+                    <div class="height97 width15 bg-E6212A"></div>
+                    <div class="width80 mrgn-lft-15 ">
+                      <span class="clr-E6212A bold txt-2vmin">Valsartan</span>
+                    </div>
+                  </div>
+                  <div class="flex item-center width100 height10 mrgn-top-2p5 ">
+                    <div class="height97 width15 bg-004285"></div>
+                    <div class="width80 mrgn-lft-15 ">
+                      <span class="clr-004285 bold txt-2vmin">Cialis</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="width40 height97 flex column">
+                <div class="width100 height10 flex item-center mrgn-lft-15">
+                  <span class="bold txt-3n5vmin ">Profit <span class="bold txt-2vmin left-bdr-green"> &nbsp; 5000</span</span>
+                </div>
+                <!-- <div class="width100 height90">
+                  <canvas id="profit" style="width: 90%; height: 90%; position: relative; top:-15%;"></canvas>
+                </div> -->
+                <div class="width100 height90 canvas-div">
+                  <canvas id="profit" height="30vh" width="30vw" class=""></canvas>
+                </div>
+              </div>
+
+            </div>
+            <div class="width40 flex height100 column bg-8CBDA8 bx-shdw-939393 rad2">
+              <div class="width100 height20 flex mrgn-lft-15 ">
+                <span class="bold txt-3n5vmin">Risk Analysis</span>
+              </div>
+              <div class="width100 height80 flex column mrgn-lft-15">
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-green ">  <span class="bold txt-2vmin mrgn-lft-1p5">Age Restriction</span> </div>
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-red">  <span class="bold txt-2vmin mrgn-lft-1p5">Medicine's expiry date coming soon</span> </div>
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-orange">  <span class="bold txt-2vmin mrgn-lft-1p5">Demand of medicine KEppra is less</span> </div>
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-green">  <span class="bold txt-2vmin mrgn-lft-1p5 ">Medicine Lybra is out of stock</span> </div>
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-orange">  <span class="bold txt-2vmin mrgn-lft-1p5 ">GP Data breached at Shelton center</span> </div>
+                <div class="mrgn0n1 mrgn-top-1p5 left-bdr-red">  <span class="bold txt-2vmin mrgn-lft-1p5 ">Data breached at Shelton center</span> </div>
+
+                
+              </div>
+            </div>
+          </div>
+          <div class="height70 width97 flex">
+            <div class="height97 width48">
+              <!-- <div class="width50 height97"> -->
+              <div class="width100 height50 bg-A2D8DF bx-shdw-939393 bdr-rad-20">
+                <div class="width100 height10 flex center">
+                  <span class="bold txt-2n5vmin">Sales-Yearly</span>
+                </div>
+                <div class="width100 height80 line-div">
+                <canvas id="sales" style="width: 98%; height: 98%"></canvas>
+
+                </div>
+              </div>
+              <div class="width100 height50 bg-A2D8DF bx-shdw-939393 bdr-rad-20">
+                <div class="width100 height10 flex center ">
+                  <span class="bold txt-2n5vmin">Prchases-Yearly</span>
+                </div>
+                <div class="width100 height80 line-div">
+                <canvas id="purchases" style="width: 98%; height: 98%"></canvas>
+
+                </div>
+              </div>
+              <!-- </div> -->
+            </div>
+            <div class="width50 bg-4EA2AD height97 bdr-rad-20">
+              <!-- demand supply notification -->
+              <div class="width100 height50 flex space-between">
+                <div class="width40 flex item-center column ">
+                  <div class="height10">
+                    <span class="txt-3n5vmin bold clr-E6212A">Demand</span>
+                  </div>
+                  <div class="width100 height90 canvas-div">
+                    <canvas id="demand" height="30vh" width="30vw" class=""></canvas>
+                  </div>
+                </div>
+                <div class="width40 flex item-center column ">
+                  <div class="height10 ">
+                    <span class="txt-3n5vmin clr-004285 bold">Supply</span>
+                  </div>
+                  <div class="width100 height90 canvas-div">
+                    <canvas id="supply" height="30vh" width="30vw" class=""></canvas>
+                  </div>
+                </div>
+                <!-- <div class="width30 flex item-center column">
+                  <div class="height90 width100">
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-FF005F"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-FF005F bold txt-2vmin">Lybrel</span>
+                      </div>
+                    </div>
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-98D33B"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-98D33B bold txt-2vmin">Keppra</span>
+                      </div>
+                    </div>
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-FFCA02"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-FFCA02 bold txt-2vmin"
+                          >Gaunfacine</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-FF8500"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-FF8500 bold txt-2vmin"
+                          >Topiramate</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-E6212A"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-E6212A bold txt-2vmin">Valsartan</span>
+                      </div>
+                    </div>
+                    <div class="flex item-center width100 height10 ">
+                      <div class="height97 width15 bg-004285"></div>
+                      <div class="width80 mrgn-lft-15">
+                        <span class="clr-004285 bold txt-2vmin">Cialis</span>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <div class="width100 height50 flex space-around bg-FF8500 bx-shdw-939393 mrgn0n1 rad-8">
+                <div class="width50 mrgn-top-1p5">
+                  <div class="height10 flex item-center center">
+                    <span class="txt-3n5vmin bold clr-004285"
+                      >Stakeholders</span
+                    >
+                  </div>
+                  <div class="height90 flex column space-evenly mrgn-lft-15">
+                    <span class="txt-2vmin bold clr-07131F"
+                      ># JOIDEEP BANERJEE</span
+                    >
+                    <span class="txt-2vmin bold clr-07131F"
+                      ># STAFFORDSHIRE UNI.</span
+                    >
+                    <span class="txt-2vmin bold clr-07131F"
+                      ># KELVIN HELTON</span
+                    >
+                    <span class="txt-2vmin bold clr-07131F"># HOBBS BOB</span>
+                  </div>
+                </div>
+                <div class="width50 mrgn-top-1p5">
+                  <div class="height10 flex item-center center">
+                    <span class="txt-3n5vmin bold clr-E6212A"
+                      >Notifications</span
+                    >
+                  </div>
+                  <div class="height90 flex column space-evenly">
+                    <span
+                      class="txt-2n5vmin bold left-bdr-red pad-lft-2 clr-02006D"
+                      >Customers data arrived from GP</span
+                    >
+                    <span
+                      class="txt-2n5vmin bold left-bdr-orange pad-lft-2 clr-02006D"
+                      >Less Demand for Topiramate</span
+                    >
+                    <span
+                      class="txt-2n5vmin bold left-bdr-green pad-lft-2 clr-02006D"
+                      >Demand is high for Lybrel</span
+                    >
+                    <span
+                      class="txt-2n5vmin bold left-bdr-red pad-lft-2 clr-02006D"
+                      >Supply is less for Cialis
+                    </span>
+                  </div>
+                </div>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- <script src="./js/renderer.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script>
+function displayDrugs(){
+  window.location.href = "drugs.html";
+
+}
+// document.querySelector("#drugs").addEventListener("click", async () => {
+  
+//         window.location.href = "drugs.html";
+
+//   });
+    const xValues = ['2015','2016','2017','2018', '2019', '2020', '2021', '2022'];
+
+    new Chart("sales", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            data: [16009, 21409, 10609, 20600, 20700,23200,28766,28880],
+            borderColor: "#FF005F",
+            label:"Lybrel",
+            fill: false,
+          },
+          {
+            data: [10060, 12000, 20000, 15000, 15000,18100, 12609, 12600],
+            borderColor: "#B693A8",
+            label:"Keppra",
+            fill: false,
+          },
+          {
+            data: [12000, 14700, 13000, 20000, 18000,18000,20000,23000],
+            borderColor: "#312DEA",
+            label:"Gaunfacine",
+            fill: false,
+          },
+          {
+            data: [10000, 18700, 20000, 20030, 25300,20000,23000,20100],
+            borderColor: "#122746",
+            label:"Topiramate",
+            fill: false,
+          },
+          {
+            data: [19000, 14700, 14000, 18030, 20300,23000,18000,15000],
+            borderColor: "#98D33B",
+            label:"Cialis",
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        legend: { display: true,position:'right' },
+      },
+    });
+
+    const xValues1 = ['2015','2016','2017','2018', '2019', '2020', '2021', '2022'];
+
+    new Chart("purchases", {
+      type: "line",
+      data: {
+        labels: xValues1,
+        datasets: [
+          {
+            data: [16009, 21409, 10609, 20600, 20700,23200,28766,28880],
+            borderColor: "#FF005F",
+            label:"Lybrel",
+            fill: false,
+          },
+          {
+            data: [10060, 12000, 20000, 15000, 15000,18100, 12609, 12600],
+            borderColor: "#B693A8",
+            label:"Keppra",
+            fill: false,
+          },
+          {
+            data: [12000, 14700, 13000, 20000, 18000,18000,20000,23000],
+            borderColor: "#312DEA",
+            label:"Gaunfacine",
+            fill: false,
+          },
+          {
+            data: [10000, 18700, 20000, 20030, 25300,20000,23000,20100],
+            borderColor: "#122746",
+            label:"Topiramate",
+            fill: false,
+          },
+          {
+            data: [19000, 14700, 14000, 18030, 20300,23000,18000,15000],
+            borderColor: "#98D33B",
+            label:"Cialis",
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        legend: { display: true,position:'right' },
+      },
+    });
+
+    var demand = ["Lybrel", "Keppra", "Gaunfacine", "Topiramate", "Valsartan"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["#FF005F", "#98D33B", "#FFCA02", "#e8c3b9", "#1e7145"];
+
+    new Chart("demand", {
+      type: "pie",
+      data: {
+        // labels: demand,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: yValues,
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          // text: "Demand"
+        },
+      },
+    });
+    var demand = ["Lybrel", "Keppra", "Gaunfacine", "Topiramate", "Valsartan"];
+    var supyValues = [5, 47, 44, 84, 65];
+    var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
+
+    new Chart("supply", {
+      type: "pie",
+      data: {
+        // labels: demand,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: supyValues,
+          },
+        ],
+      },
+      options: {
+        legend: { display: true,position:'right' },
+        title: {
+          display: true,
+          // text: "Demand"
+        },
+      },
+    });
+    // Revenuw chart
+    var demand = ["Lybrel", "Keppra", "Gaunfacine", "Topiramate", "Valsartan"];
+    const revyValues = [25, 89, 24, 24, 35];
+    var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
+
+    new Chart("revenue", {
+      type: "pie",
+      data: {
+        // labels: demand,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: revyValues,
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          // text: "Demand"
+        },
+      },
+    });
+
+    // revenue chart end
+    //profit chart
+    var demand = ["Lybrel", "Keppra", "Gaunfacine", "Topiramate", "Valsartan"];
+    const profityValues = [5, 49, 44, 24, 75];
+    var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
+
+    new Chart("profit", {
+      type: "pie",
+      data: {
+        // labels: demand,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: profityValues,
+          },
+        ],
+      },
+      options: {
+         legend: { display: true,position:'right' },
+        title: {
+          display: true,
+          // text: "Demand"
+        },
+      },
+    });
+
+    // profit chart end
+  </script>
+</html>

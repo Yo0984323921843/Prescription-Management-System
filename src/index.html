@@ -17,7 +17,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="./js/renderer.js"></script>
 
     <title>Prescription Management System</title>
   </head>
@@ -35,8 +34,10 @@
             <div class="flex center item-center bg-122746 width20">
               <img src="./images/user.png" class="imglogo" />
             </div>
-            <div class="bg-2C3E59 pad5 width80 flex  item-center">
-              <span class="clr-D9D9D9 emailtxt mrgn-lft-15">Email Id</span>
+            
+            <div class="bg-2C3E59 flex width100">
+              <!-- <span class="clr-D9D9D9 emailtxt mrgn-lft-15">Email Id</span> -->
+              <input type="text" id="email_id" name="email_id"  value="example@example.com" class="clr-D9D9D9 emailtxt bdr-none width100 bg-2C3E59 pad5  flex  item-center">
             </div>
           </div>
           <div class="flex width80 height20 mrgn3">
@@ -46,8 +47,11 @@
                 class="imglogo"
               />
             </div>
-            <div class="bg-2C3E59 pad5 width80 flex item-center">
-              <span class="clr-D9D9D9 mrgn-lft-15 emailtxt">Password</span>
+            <div class="bg-2C3E59 flex width100">
+
+              <!-- <span class="clr-D9D9D9 mrgn-lft-15 emailtxt">Password</span> -->
+              <input type="password" id="password" name="password" value="Admin@123" class="clr-D9D9D9 emailtxt bdr-none width100 bg-2C3E59 pad5  flex  item-center">
+
             </div>
           </div>
           <div class="flex width80 height20  space-between item-center mrgn-top-8">
@@ -57,7 +61,8 @@
         </div>
       
       </div>
-      <div class=""><button class="login-btn clr-D9D9D9 emailtxt mrgn-top-1p5">Login</button></div>
+      <div class=""><button class="login-btn clr-D9D9D9 emailtxt mrgn-top-1p5"  onclick="yo()" id="login-btn">Login</button></div>
     </div>
   </body>
+  <script src="./js/renderer.js"></script>
 </html>
